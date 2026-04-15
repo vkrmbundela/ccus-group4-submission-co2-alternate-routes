@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IIT Hyderabad Traffic Segregation Simulation</title>
+  <meta name="description" content="Interactive dashboard comparing vehicular CO2 emissions and pedestrian burden for two campus routing scenarios at IIT Hyderabad.">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/map.css">
+  <link rel="stylesheet" href="css/charts.css">
+  <link rel="stylesheet" href="css/dark-mode.css">
+  <link rel="stylesheet" href="css/accessibility.css">
+
+  <!-- UMD Libraries -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.2.0/turf.min.js"></script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="app-header">
+    <div class="header-left">
+      <h1 class="app-title">IIT Hyderabad Traffic Segregation</h1>
+      <p class="app-subtitle">CO2 Emissions &amp; Pedestrian Burden Analysis</p>
+    </div>
+    <div class="header-right">
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="theme-icon-light">&#9788;</span>
+        <span class="theme-icon-dark">&#9790;</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content" class="dashboard-grid">
+    <!-- Left Panel: Map -->
+    <section class="map-panel" aria-label="Campus map">
+      <div id="map"></div>
+      <div class="map-legend" id="map-legend">
+        <h3>Legend</h3>
+        <div class="legend-item">
+          <span class="legend-line legend-violet"></span>
+          <span>Violet Route (Academic Spine + North Link)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-line legend-red"></span>
+          <span>Red Route (Workshop Loop Corridor)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-marker legend-b1"></span>
+          <span>B1 — Academic Block C Rear Parking</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-marker legend-b2"></span>
+          <span>B2 — Academic Block C Rear Overflow</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-marker legend-r"></span>
+          <span>R1/R2 — Red Route Intermediate Parking</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-marker legend-v"></span>
+          <span>V1/V2 — Violet Route Intermediate Parking</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-marker legend-building"></span>
+          <span>Zone Building</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Right Panel: Inputs -->
+    <section class="input-panel" aria-label="Simulation inputs">
+      <div class="panel-header">
+        <h2>Simulation Inputs</h2>
+      </div>
+      <div class="panel-body">
+        <!-- Phase 1: Vehicle Inputs -->
+        <fieldset class="input-group" id="vehicle-inputs">
+          <legend>Phase 1: Daily Vehicle Counts</legend>
+          <!-- Dynamically populated by input-panel.js -->
+        </fieldset>
+
+        <!-- Phase 2: Building Populations -->
+        <fieldset class="input-group" id="building-inputs">
+          <legend>Phase 2: Building Populations</legend>
+          <div class="building-controls">
+            <button id="btn-add-building" class="btn-add-building" aria-label="Add a new building by clicking on the map">
+              + Pick on Map
+            </button>
+          </div>
+          <div class="building-table-wrapper">
+            <table id="building-table" aria-label="Academic building populations">
+              <thead>
+                <tr>
+                  <th>Building</th>
+                  <th>Pop.</th>
+                  <th>Wt.</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="building-table-body">
+                <!-- Dynamically populated by input-panel.js -->
+              </tbody>
+            </table>
+          </div>
+        </fieldset>
+      </div>
+    </section>
+
+    <!-- Bottom Right Panel: Charts & Results -->
+    <section class="chart-panel" aria-label="Results visualization">
+      <div class="panel-header">
+        <h2>Results Dashboard</h2>
+      </div>
+      <div class="panel-body">
+        <!-- Summary Cards -->
+        <div class="results-summary" id="results-summary">
+          <!-- Dynamically populated by results-display.js -->
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+          <div class="chart-container">
+            <h3>CO2 Emissions Comparison (kg/day)</h3>
+            <canvas id="emissions-chart" aria-label="Bar chart comparing CO2 emissions between Violet and Red routes"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Pedestrian Burden Comparison</h3>
+            <canvas id="burden-chart" aria-label="Bar chart comparing pedestrian burden from B1 and B2 parking hubs"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Emission Breakdown by Vehicle Type</h3>
+            <canvas id="breakdown-chart" aria-label="Doughnut chart showing emission share by vehicle type"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Data sources: ICCT, IEA. Coordinates approximate (OpenStreetMap). For academic use.</p>
+  </footer>
+
+  <!-- App Entry Point -->
+  <script type="module" src="js/main.js?v=2"></script>
+</body>
+</html>

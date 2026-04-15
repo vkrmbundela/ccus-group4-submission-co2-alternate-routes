@@ -1,0 +1,214 @@
+{
+  "buildings": [
+    {
+      "id": "academic-block-a",
+      "name": "Academic Block A",
+      "category": "academic",
+      "coordinates": [
+        17.5946211,
+        78.1232826
+      ],
+      "weight": 1.0,
+      "defaultPopulation": 850,
+      "departments": [
+        "Academic"
+      ],
+      "distanceFromB1_m": 240,
+      "distanceFromB2_m": 235
+    },
+    {
+      "id": "academic-block-b",
+      "name": "Academic Block B",
+      "category": "academic",
+      "coordinates": [
+        17.5951842,
+        78.122427
+      ],
+      "weight": 0.98,
+      "defaultPopulation": 800,
+      "departments": [
+        "Academic"
+      ],
+      "distanceFromB1_m": 157,
+      "distanceFromB2_m": 154
+    },
+    {
+      "id": "academic-block-c",
+      "name": "Academic Block C",
+      "category": "academic",
+      "coordinates": [
+        17.5957609,
+        78.1233629
+      ],
+      "weight": 0.95,
+      "defaultPopulation": 820,
+      "departments": [
+        "Academic"
+      ],
+      "distanceFromB1_m": 139,
+      "distanceFromB2_m": 134
+    },
+    {
+      "id": "c-block-annex",
+      "name": "C Block Annex",
+      "category": "academic",
+      "coordinates": [
+        17.5957262,
+        78.122849
+      ],
+      "weight": 0.9,
+      "defaultPopulation": 420,
+      "departments": [
+        "Academic"
+      ],
+      "distanceFromB1_m": 109,
+      "distanceFromB2_m": 104
+    },
+    {
+      "id": "department-of-cse-and-ee",
+      "name": "Department of CSE & EE",
+      "category": "academic",
+      "coordinates": [
+        17.5957255,
+        78.1243287
+      ],
+      "weight": 1.0,
+      "defaultPopulation": 950,
+      "departments": [
+        "CSE",
+        "EE"
+      ],
+      "distanceFromB1_m": 228,
+      "distanceFromB2_m": 222
+    },
+    {
+      "id": "chemistry-department-building",
+      "name": "Chemistry Department Building",
+      "category": "academic",
+      "coordinates": [
+        17.5939405,
+        78.1233434
+      ],
+      "weight": 0.8,
+      "defaultPopulation": 300,
+      "departments": [
+        "Chemistry"
+      ],
+      "distanceFromB1_m": 313,
+      "distanceFromB2_m": 308
+    },
+    {
+      "id": "research-complex",
+      "name": "Research Complex",
+      "category": "research",
+      "coordinates": [
+        17.5945507,
+        78.1242476
+      ],
+      "weight": 0.85,
+      "defaultPopulation": 500,
+      "departments": [
+        "Research"
+      ],
+      "distanceFromB1_m": 301,
+      "distanceFromB2_m": 296
+    },
+    {
+      "id": "knowledge-research-centre",
+      "name": "Knowledge Research Centre (Central Library)",
+      "category": "academic",
+      "coordinates": [
+        17.592279,
+        78.1244779
+      ],
+      "weight": 1.0,
+      "defaultPopulation": 900,
+      "departments": [
+        "Library",
+        "Academic Services"
+      ],
+      "distanceFromB1_m": 529,
+      "distanceFromB2_m": 524
+    },
+    {
+      "id": "lecture-hall-complex",
+      "name": "Lecture Hall Complex",
+      "category": "academic",
+      "coordinates": [
+        17.5925483,
+        78.1229048
+      ],
+      "weight": 1.0,
+      "defaultPopulation": 1200,
+      "departments": [
+        "All"
+      ],
+      "distanceFromB1_m": 454,
+      "distanceFromB2_m": 450
+    },
+    {
+      "id": "administrative-block",
+      "name": "Administrative Block",
+      "category": "admin",
+      "coordinates": [
+        17.5915858,
+        78.1245415
+      ],
+      "weight": 0.6,
+      "defaultPopulation": 180,
+      "departments": [
+        "Admin"
+      ],
+      "distanceFromB1_m": 603,
+      "distanceFromB2_m": 598
+    },
+    {
+      "id": "department-of-design",
+      "name": "Department of Design",
+      "category": "academic",
+      "coordinates": [
+        17.5916307,
+        78.1234445
+      ],
+      "weight": 0.75,
+      "defaultPopulation": 260,
+      "departments": [
+        "Design"
+      ],
+      "distanceFromB1_m": 564,
+      "distanceFromB2_m": 560
+    },
+    {
+      "id": "biomed-building",
+      "name": "BioMed Building",
+      "category": "research",
+      "coordinates": [
+        17.5935161,
+        78.1225316
+      ],
+      "weight": 0.72,
+      "defaultPopulation": 320,
+      "departments": [
+        "BioMed"
+      ],
+      "distanceFromB1_m": 343,
+      "distanceFromB2_m": 340
+    },
+    {
+      "id": "msme-building",
+      "name": "MSME Building",
+      "category": "research",
+      "coordinates": [
+        17.5931379,
+        78.1234429
+      ],
+      "weight": 0.7,
+      "defaultPopulation": 260,
+      "departments": [
+        "MSME"
+      ],
+      "distanceFromB1_m": 401,
+      "distanceFromB2_m": 396
+    }
+  ]
+}

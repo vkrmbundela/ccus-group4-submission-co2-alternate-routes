@@ -1,0 +1,40 @@
+/* ===== Charts Grid ===== */
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+/* Breakdown chart spans full width */
+.charts-grid .chart-container:last-child {
+  grid-column: 1 / -1;
+}
+
+.chart-container {
+  position: relative;
+}
+
+.chart-container h3 {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
+  text-align: center;
+}
+
+.chart-container canvas {
+  max-height: 200px;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 900px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .charts-grid .chart-container:last-child {
+    grid-column: 1;
+  }
+}

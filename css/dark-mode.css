@@ -1,0 +1,61 @@
+/* ===== Dark Mode Overrides ===== */
+/* Applied via [data-theme="dark"] on <html> */
+
+[data-theme="dark"] {
+  --color-bg: #0d1117;
+  --color-surface: #161b22;
+  --color-surface-alt: #21262d;
+  --color-border: #30363d;
+  --color-text: #e6edf3;
+  --color-text-secondary: #8b949e;
+  --color-text-muted: #6e7681;
+
+  --color-violet-bg: rgba(123, 45, 142, 0.15);
+  --color-red-bg: rgba(211, 47, 47, 0.15);
+
+  --color-primary: #58a6ff;
+  --color-primary-hover: #79b8ff;
+  --color-success: #3fb950;
+  --color-warning: #d29922;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Leaflet tile layer brightness adjustment for dark mode */
+[data-theme="dark"] .leaflet-tile-pane {
+  filter: brightness(0.7) contrast(1.1) saturate(0.8);
+}
+
+/* Chart.js text colors in dark mode */
+[data-theme="dark"] .leaflet-popup-content-wrapper {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme="dark"] .leaflet-popup-tip {
+  background-color: var(--color-surface) !important;
+}
+
+/* Leaflet control backgrounds */
+[data-theme="dark"] .leaflet-control-zoom a,
+[data-theme="dark"] .leaflet-control-scale-line {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* Scrollbar styling for dark mode */
+[data-theme="dark"] .building-table-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+[data-theme="dark"] .building-table-wrapper::-webkit-scrollbar-track {
+  background: var(--color-surface-alt);
+}
+
+[data-theme="dark"] .building-table-wrapper::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
