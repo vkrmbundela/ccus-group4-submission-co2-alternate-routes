@@ -13,12 +13,16 @@ let routeData = null;
  * @param {L.Map} map - Leaflet map instance
  */
 export async function initRoutes(map) {
-  const response = await fetch('./js/data/routes.json');
+  const response = await fetch('./js/data/routes.json', { cache: 'no-store' });
   routeData = await response.json();
 
   const distances = {};
 
-  for (const feature of routeData.features) {
+  let totalNetworkDistance = 0;
+
+  // Reserve features so solid lines sit on top of dashed lines
+  const sortedFeatures = [...routeData.features].reverse();
+  for (const feature of sortedFeatures) {
     const routeId = feature.properties.id;
     const routeConfig = ROUTES[routeId];
     if (!routeConfig) continue;
@@ -26,15 +30,21 @@ export async function initRoutes(map) {
     // Compute distance using Turf.js
     const lengthKm = turf.length(feature, { units: 'kilometers' });
     distances[routeId] = Math.round(lengthKm * 100) / 100; // 2 decimal places
+    totalNetworkDistance += distances[routeId];
 
-    // Draw the polyline
-    const layer = L.geoJSON(feature, {
-      style: {
-        color: routeConfig.color,
-        weight: 5,
-        opacity: 0.8,
-        dashArray: routeId === 'violet' ? null : '10, 8',
-      },
+    const domDist = document.getElementById(`dist-${routeId}`);
+    if (domDist) domDist.textContent = `(${distances[routeId].toFixed(2)} km)`;
+
+    // Draw the polyline with marching ants
+    const latlngs = feature.geometry.coordinates.map(coord => [coord[1], coord[0]]);
+    const layer = L.polyline.antPath(latlngs, {
+      color: routeConfig.color,
+      weight: 5,
+      opacity: 0.8,
+      pulseColor: '#ffffff',
+      delay: 800,
+      dashArray: [15, 20],
+      hardwareAccelerated: true
     });
 
     // Popup with route info
@@ -48,11 +58,16 @@ export async function initRoutes(map) {
     routeLayers[routeId] = layer;
   }
 
+  const domTotal = document.getElementById('dist-total');
+  if (domTotal) domTotal.textContent = totalNetworkDistance.toFixed(2);
+
   // Add parking hub markers
   if (routeData.parkingHubs) {
     for (const [hubId, hub] of Object.entries(routeData.parkingHubs)) {
       const normalizedHubId = String(hubId).toUpperCase();
       let iconClass = 'parking-hub-b2';
+      if (normalizedHubId === 'A') iconClass = 'parking-hub-a';
+      if (normalizedHubId === 'B') iconClass = 'parking-hub-b';
       if (normalizedHubId === 'B1') iconClass = 'parking-hub-b1';
       if (normalizedHubId === 'B2') iconClass = 'parking-hub-b2';
       if (normalizedHubId.startsWith('R')) iconClass = 'parking-hub-r';

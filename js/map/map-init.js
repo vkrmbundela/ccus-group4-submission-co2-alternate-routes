@@ -13,6 +13,12 @@ export function initMap() {
   map = L.map('map', {
     center: MAP_CENTER,
     zoom: MAP_ZOOM,
+    minZoom: 15, // Lock zoom to prevent viewing outside campus bounds
+    maxBounds: L.latLngBounds(
+      L.latLng(17.58, 78.11), // SouthWest
+      L.latLng(17.61, 78.14)  // NorthEast
+    ),
+    maxBoundsViscosity: 1.0,
     zoomControl: true,
     attributionControl: true,
   });

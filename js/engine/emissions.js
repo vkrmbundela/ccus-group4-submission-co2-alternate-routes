@@ -32,6 +32,7 @@ export function calculateRouteEmissions(vehicleCounts, distanceKm) {
   }
 
   return {
+    distanceKm,
     totalKg: Math.round(totalKg * 100) / 100,
     breakdown,
   };

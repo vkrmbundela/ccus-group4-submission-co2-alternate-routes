@@ -29,8 +29,17 @@ const CATEGORY_COLORS = {
 export async function initBuildingMarkers(map) {
   mapRef = map;
 
-  const response = await fetch('./js/data/buildings.json');
-  buildingData = await response.json();
+  try {
+    const response = await fetch('./js/data/buildings.json');
+    const contentType = response.headers.get('content-type');
+    if (!response.ok || (contentType && contentType.indexOf('application/json') === -1)) {
+      throw new Error('Buildings data not found or invalid format');
+    }
+    buildingData = await response.json();
+  } catch (error) {
+    console.warn('Falling back to empty buildings:', error);
+    buildingData = { buildings: [] };
+  }
 
   for (const building of buildingData.buildings) {
     addMarkerToMap(building);

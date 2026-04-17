@@ -30,7 +30,7 @@
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr 420px;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: auto 1fr;
   gap: var(--space-md);
   padding: var(--space-md);
   height: calc(100vh - 72px - 40px); /* viewport - header - footer */

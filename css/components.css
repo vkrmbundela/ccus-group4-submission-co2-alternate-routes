@@ -1,10 +1,16 @@
 /* ===== Input Components ===== */
 
 .input-group {
-  border: 1px solid var(--color-border);
+  border: none;
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
   border-radius: var(--radius-md);
   padding: var(--space-md);
   margin-bottom: var(--space-md);
+  transition: box-shadow var(--transition-fast);
+}
+.input-group:hover {
+  box-shadow: var(--shadow-md);
 }
 
 .input-group legend {
@@ -16,16 +22,26 @@
   padding: 0 var(--space-xs);
 }
 
+.input-control-group {
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-surface-alt);
+}
+
+.input-control-group:last-child {
+  border-bottom: none;
+}
+
 .input-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-xs) 0;
-  border-bottom: 1px solid var(--color-surface-alt);
 }
 
-.input-row:last-child {
-  border-bottom: none;
+.input-slider {
+  width: 100%;
+  margin-top: var(--space-sm);
+  cursor: pointer;
+  accent-color: var(--color-primary);
 }
 
 .input-row label {
@@ -197,7 +213,7 @@
 
 .results-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-sm);
   margin-bottom: var(--space-md);
 }
@@ -206,21 +222,35 @@
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-md);
   border-left: 4px solid transparent;
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .result-card-violet {
-  background-color: var(--color-violet-bg);
+  background-color: var(--color-surface);
   border-left-color: var(--color-violet);
 }
 
 .result-card-red {
-  background-color: var(--color-red-bg);
+  background-color: var(--color-surface);
   border-left-color: var(--color-red);
 }
 
 .result-card-savings {
-  background-color: var(--color-surface-alt);
-  border-left-color: var(--color-success);
+  background: linear-gradient(135deg, var(--color-surface) 0%, #f0fdf4 100%);
+  border-left: 6px solid var(--color-success);
+  box-shadow: var(--shadow-md);
+}
+
+.result-card-savings .result-label {
+  color: var(--color-success);
+  font-weight: 700;
 }
 
 .result-label {

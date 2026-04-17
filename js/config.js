@@ -3,28 +3,31 @@
 // Map Settings
 export const MAP_CENTER = [17.5939, 78.1232];
 export const MAP_ZOOM = 17;
-export const TILE_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-export const TILE_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+export const TILE_URL = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+export const TILE_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 // Vehicle Types — emission factors in grams CO2 per kilometer
 // Sources: ICCT (Indian fleet averages), IEA (grid factors)
 export const VEHICLE_TYPES = {
   petrolCar: {
     label: 'Petrol Car',
-    emissionFactor: 120, // ICCT FY2022-23 Indian fleet avg
-    defaultCount: 80,
+    emissionFactor: 200.0, // WRI India 2015 Uplift Average
+    defaultCount: 25,
+    max: 50,
     icon: 'car',
   },
   dieselCar: {
     label: 'Diesel Car',
-    emissionFactor: 140, // ICCT diesel fleet avg
-    defaultCount: 40,
+    emissionFactor: 201.5, // WRI India 2015 Uplift Average
+    defaultCount: 15,
+    max: 50,
     icon: 'car',
   },
   twoWheeler: {
     label: 'Two-Wheeler',
-    emissionFactor: 41, // ICCT FY2018-19
-    defaultCount: 200,
+    emissionFactor: 45.8, // WRI India 2015 Uplift Average
+    defaultCount: 50,
+    max: 100,
     icon: 'bike',
   },
 };
@@ -34,18 +37,18 @@ export const ROUTES = {
   violet: {
     id: 'violet',
     name: 'Violet Route (Academic Spine + North Link)',
-    description: 'South approach → academic spine → rear Academic Block C parking (B1)',
+    description: 'South approach → academic spine → shared parking between A and B block corner',
     color: '#7B2D8E',
     colorLight: '#a855c7',
-    parkingHub: 'B1',
+    parkingHub: 'B',
   },
   red: {
     id: 'red',
     name: 'Red Route (Workshop Loop Corridor)',
-    description: 'Workshop-side loop corridor → rear Academic Block C overflow parking (B2)',
+    description: 'Workshop-side loop corridor → shared parking between A and B block corner',
     color: '#D32F2F',
     colorLight: '#ef5350',
-    parkingHub: 'B2',
+    parkingHub: 'B',
   },
 };
 

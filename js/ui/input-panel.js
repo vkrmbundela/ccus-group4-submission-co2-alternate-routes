@@ -14,12 +14,20 @@ export function initVehicleInputs() {
   const container = document.getElementById('vehicle-inputs');
 
   for (const [type, config] of Object.entries(VEHICLE_TYPES)) {
+    const controlGroup = document.createElement('div');
+    controlGroup.className = 'input-control-group';
+
     const row = document.createElement('div');
     row.className = 'input-row';
 
     const label = document.createElement('label');
     label.htmlFor = `vehicle-${type}`;
-    label.textContent = config.label;
+    let icon = '';
+    if (config.icon === 'car' && type === 'petrolCar') icon = '🚗 ';
+    else if (config.icon === 'car' && type === 'dieselCar') icon = '🚙 ';
+    else if (config.icon === 'bike') icon = '🛵 ';
+    
+    label.textContent = icon + config.label;
 
     const inputWrapper = document.createElement('div');
     inputWrapper.className = 'input-with-unit';
@@ -29,7 +37,7 @@ export function initVehicleInputs() {
     input.id = `vehicle-${type}`;
     input.name = type;
     input.min = '0';
-    input.max = '5000';
+    input.max = config.max ? config.max.toString() : '5000';
     input.value = config.defaultCount;
     input.setAttribute('aria-label', `Daily count of ${config.label}`);
 
@@ -42,13 +50,35 @@ export function initVehicleInputs() {
 
     row.appendChild(label);
     row.appendChild(inputWrapper);
-    container.appendChild(row);
+    controlGroup.appendChild(row);
 
-    input.addEventListener('input', debounce(() => {
+    const slider = document.createElement('input');
+    slider.type = 'range';
+    slider.className = 'input-slider';
+    slider.min = '0';
+    slider.max = config.max ? config.max.toString() : '1000';
+    slider.step = '1';
+    slider.value = config.defaultCount;
+    slider.setAttribute('aria-label', `Adjust daily count of ${config.label}`);
+    controlGroup.appendChild(slider);
+
+    container.appendChild(controlGroup);
+
+    const updateState = (val) => {
       const counts = { ...getState('vehicleCounts') };
-      counts[type] = Math.max(0, parseInt(input.value) || 0);
+      counts[type] = Math.max(0, parseInt(val) || 0);
       setState({ vehicleCounts: counts });
-    }, 150));
+    };
+
+    input.addEventListener('input', () => {
+      slider.value = input.value;
+      updateState(input.value);
+    });
+
+    slider.addEventListener('input', () => {
+      input.value = slider.value;
+      updateState(slider.value);
+    });
   }
 }
 
