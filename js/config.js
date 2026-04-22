@@ -9,32 +9,33 @@ export const TILE_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/c
 // Vehicle Types — emission factors in grams CO2 per kilometer
 // Source: TERI — "Per passenger emission in Delhi: Different Modes"
 // Max counts bounded by parking infrastructure: 40 car slots, 80 bike slots
+// Default counts from campus survey avg (10, 13, 16 Apr 2026): 27 cars, 39 two-wheelers
 export const VEHICLE_TYPES = {
   petrolCar: {
     label: 'Petrol Car',
     emissionFactor: 143.7, // 2270 g/L ÷ 15.79 km/L (TERI)
-    defaultCount: 25,
+    defaultCount: 16,
     max: 40,               // bounded by 40 car parking slots (shared with diesel)
     icon: 'car',
   },
   dieselCar: {
     label: 'Diesel Car',
     emissionFactor: 149.9, // 2640 g/L ÷ 17.61 km/L (TERI)
-    defaultCount: 15,
+    defaultCount: 11,
     max: 40,               // bounded by 40 car parking slots (shared with petrol)
     icon: 'car',
   },
   scooter: {
     label: 'Scooter',
     emissionFactor: 47.3,  // 2270 g/L ÷ 48.00 km/L (TERI)
-    defaultCount: 30,
+    defaultCount: 20,
     max: 80,               // bounded by 80 bike parking slots (shared with motorcycle)
     icon: 'bike',
   },
   motorcycle: {
     label: 'Motorcycle',
     emissionFactor: 39.2,  // 2270 g/L ÷ 57.85 km/L (TERI)
-    defaultCount: 30,
+    defaultCount: 19,
     max: 80,               // bounded by 80 bike parking slots (shared with scooter)
     icon: 'bike',
   },
