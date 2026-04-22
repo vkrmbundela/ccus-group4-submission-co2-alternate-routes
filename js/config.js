@@ -3,8 +3,8 @@
 // Map Settings
 export const MAP_CENTER = [17.5939, 78.1232];
 export const MAP_ZOOM = 17;
-export const TILE_URL = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-export const TILE_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+export const TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+export const TILE_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
 // Vehicle Types — emission factors in grams CO2 per kilometer
 // Source: TERI — "Per passenger emission in Delhi: Different Modes"
