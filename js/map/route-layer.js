@@ -44,6 +44,7 @@ export async function initRoutes(map) {
       pulseColor: '#ffffff',
       delay: 800,
       dashArray: [15, 20],
+      reverse: false,
       hardwareAccelerated: true
     });
 

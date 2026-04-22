@@ -9,6 +9,7 @@ import { initVehicleInputs, initParkingInputs } from './ui/input-panel.js';
 import { initCharts, updateCharts } from './ui/chart-panel.js';
 import { updateResults } from './ui/results-display.js';
 import { initThemeToggle } from './ui/theme-toggle.js';
+import { initAnalysisPanel } from './ui/analysis-panel.js';
 import { compareRouteEmissions } from './engine/emissions.js';
 
 async function init() {
@@ -23,6 +24,7 @@ async function init() {
   initParkingInputs();
   initCharts();
   initThemeToggle();
+  initAnalysisPanel();
 
   // 4. Wire the recalculation pipeline
   function recalculate() {
