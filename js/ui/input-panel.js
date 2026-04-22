@@ -3,9 +3,59 @@
 // Buildings are fully customizable: add (via map pick), remove, edit population & weight.
 // All changes flow through state.setState().
 
-import { VEHICLE_TYPES } from '../config.js';
+import { VEHICLE_TYPES, PARKING_DEFAULTS } from '../config.js';
 import { getState, setState, subscribe } from '../state.js';
 import { debounce } from '../utils/debounce.js';
+
+/**
+ * Initialize the parking infrastructure input controls.
+ */
+export function initParkingInputs() {
+  const container = document.getElementById('parking-inputs');
+  if (!container) return;
+
+  for (const [type, config] of Object.entries(PARKING_DEFAULTS)) {
+    const controlGroup = document.createElement('div');
+    controlGroup.className = 'input-control-group';
+
+    const row = document.createElement('div');
+    row.className = 'input-row';
+
+    const label = document.createElement('label');
+    label.htmlFor = `parking-${type}`;
+    label.textContent = (config.icon || '') + ' ' + config.label;
+
+    const inputWrapper = document.createElement('div');
+    inputWrapper.className = 'input-with-unit';
+
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.id = `parking-${type}`;
+    input.name = type;
+    input.min = '0';
+    input.value = config.default;
+    input.setAttribute('aria-label', config.label);
+
+    const unit = document.createElement('span');
+    unit.className = 'input-unit';
+    unit.textContent = type === 'totalLots' ? 'lots' : 'slots';
+
+    inputWrapper.appendChild(input);
+    inputWrapper.appendChild(unit);
+
+    row.appendChild(label);
+    row.appendChild(inputWrapper);
+    controlGroup.appendChild(row);
+
+    container.appendChild(controlGroup);
+
+    input.addEventListener('input', () => {
+      const stats = { ...getState('parkingStats') };
+      stats[type] = Math.max(0, parseInt(input.value) || 0);
+      setState({ parkingStats: stats });
+    });
+  }
+}
 
 /**
  * Initialize the vehicle input controls.

@@ -33,8 +33,7 @@
   grid-template-rows: auto 1fr;
   gap: var(--space-md);
   padding: var(--space-md);
-  height: calc(100vh - 72px - 40px); /* viewport - header - footer */
-  min-height: 600px;
+  min-height: calc(100vh - 72px - 40px); /* viewport - header - footer */
 }
 
 .map-panel {
@@ -82,8 +81,8 @@
 
 .panel-body {
   padding: var(--space-md) var(--space-lg);
-  overflow-y: auto;
-  flex: 1;
+  overflow: visible;
+  flex: 0 0 auto;
 }
 
 /* ===== Footer ===== */
@@ -106,7 +105,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: 400px auto auto;
     height: auto;
-    min-height: auto;
+    min-height: 0;
   }
 
   .map-panel {

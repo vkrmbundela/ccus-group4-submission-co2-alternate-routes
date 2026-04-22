@@ -64,3 +64,22 @@ export const CHART_COLORS = {
     'rgba(245, 158, 11, 0.7)',  // twoWheeler
   ],
 };
+
+// Parking Infrastructure Defaults
+export const PARKING_DEFAULTS = {
+  totalLots: {
+    label: 'Total Parking Lots',
+    default: 1,
+    icon: '🅿️',
+  },
+  carParking: {
+    label: 'Car Parking Slots',
+    default: 40,
+    icon: '🚗',
+  },
+  bikeParking: {
+    label: 'Bike Parking Slots',
+    default: 60,
+    icon: '🛵',
+  },
+};

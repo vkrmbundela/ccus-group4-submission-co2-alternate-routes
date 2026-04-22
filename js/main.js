@@ -5,7 +5,7 @@
 import { subscribe, getState } from './state.js';
 import { initMap } from './map/map-init.js';
 import { initRoutes } from './map/route-layer.js';
-import { initVehicleInputs } from './ui/input-panel.js';
+import { initVehicleInputs, initParkingInputs } from './ui/input-panel.js';
 import { initCharts, updateCharts } from './ui/chart-panel.js';
 import { updateResults } from './ui/results-display.js';
 import { initThemeToggle } from './ui/theme-toggle.js';
@@ -20,13 +20,14 @@ async function init() {
 
   // 3. Initialize UI controls
   initVehicleInputs();
+  initParkingInputs();
   initCharts();
   initThemeToggle();
 
   // 4. Wire the recalculation pipeline
   function recalculate() {
     const state = getState();
-    const { vehicleCounts, routeDistances } = state;
+    const { vehicleCounts, routeDistances, parkingStats } = state;
 
     // Emissions comparison to shared destination
     const emissionsResult = compareRouteEmissions(
@@ -37,12 +38,13 @@ async function init() {
 
     // Update visualizations
     updateCharts(emissionsResult);
-    updateResults(emissionsResult);
+    updateResults(emissionsResult, parkingStats);
   }
 
   // Subscribe to all relevant state changes
   subscribe('vehicleCounts', recalculate);
   subscribe('routeDistances', recalculate);
+  subscribe('parkingStats', recalculate);
 
   // 5. Run initial calculation
   recalculate();

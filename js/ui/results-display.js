@@ -6,8 +6,9 @@ import { formatCO2 } from '../utils/format.js';
 /**
  * Update the results summary cards.
  * @param {Object} emissionsResult - from compareRouteEmissions()
+ * @param {Object} parkingStats - from state
  */
-export function updateResults(emissionsResult) {
+export function updateResults(emissionsResult, parkingStats = {}) {
   const container = document.getElementById('results-summary');
 
   const betterRoute = emissionsResult.savingsKg >= 0 ? 'Red Route' : 'Violet Route';

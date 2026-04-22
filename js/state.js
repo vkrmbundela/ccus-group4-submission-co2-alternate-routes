@@ -2,7 +2,7 @@
 // All UI updates flow through this store. No module directly calls
 // another module's update function.
 
-import { VEHICLE_TYPES } from './config.js';
+import { VEHICLE_TYPES, PARKING_DEFAULTS } from './config.js';
 
 // Build default vehicle counts from config
 const defaultVehicleCounts = {};
@@ -10,9 +10,16 @@ for (const [key, vehicle] of Object.entries(VEHICLE_TYPES)) {
   defaultVehicleCounts[key] = vehicle.defaultCount;
 }
 
+// Build default parking stats from config
+const defaultParkingStats = {};
+for (const [key, config] of Object.entries(PARKING_DEFAULTS)) {
+  defaultParkingStats[key] = config.default;
+}
+
 // Internal state
 let state = {
   vehicleCounts: { ...defaultVehicleCounts },
+  parkingStats: { ...defaultParkingStats },
   buildings: [],               // live building list (loaded from JSON, then user-editable)
   buildingPopulations: {},     // { buildingId: population }
   buildingWeights: {},         // { buildingId: weight }
