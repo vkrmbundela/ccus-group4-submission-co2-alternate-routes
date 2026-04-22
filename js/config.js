@@ -8,26 +8,27 @@ export const TILE_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/c
 
 // Vehicle Types — emission factors in grams CO2 per kilometer
 // Sources: ICCT (Indian fleet averages), IEA (grid factors)
+// Max counts bounded by parking infrastructure: 40 car slots, 80 bike slots
 export const VEHICLE_TYPES = {
   petrolCar: {
     label: 'Petrol Car',
     emissionFactor: 200.0, // WRI India 2015 Uplift Average
     defaultCount: 25,
-    max: 50,
+    max: 40,              // bounded by 40 car parking slots (shared with diesel)
     icon: 'car',
   },
   dieselCar: {
     label: 'Diesel Car',
     emissionFactor: 201.5, // WRI India 2015 Uplift Average
     defaultCount: 15,
-    max: 50,
+    max: 40,              // bounded by 40 car parking slots (shared with petrol)
     icon: 'car',
   },
   twoWheeler: {
     label: 'Two-Wheeler',
     emissionFactor: 45.8, // WRI India 2015 Uplift Average
     defaultCount: 50,
-    max: 100,
+    max: 80,              // bounded by 80 bike parking slots
     icon: 'bike',
   },
 };
@@ -65,21 +66,24 @@ export const CHART_COLORS = {
   ],
 };
 
-// Parking Infrastructure Defaults
+// Parking Infrastructure Defaults (real campus data)
 export const PARKING_DEFAULTS = {
   totalLots: {
-    label: 'Total Parking Lots',
-    default: 1,
+    label: 'Total Parking Slots',
+    default: 120,
+    max: 120,
     icon: '🅿️',
   },
   carParking: {
     label: 'Car Parking Slots',
     default: 40,
+    max: 40,
     icon: '🚗',
   },
   bikeParking: {
     label: 'Bike Parking Slots',
-    default: 60,
+    default: 80,
+    max: 80,
     icon: '🛵',
   },
 };

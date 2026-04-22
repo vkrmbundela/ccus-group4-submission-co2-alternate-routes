@@ -33,12 +33,13 @@ export function initParkingInputs() {
     input.id = `parking-${type}`;
     input.name = type;
     input.min = '0';
+    input.max = config.max ? config.max.toString() : '9999';
     input.value = config.default;
     input.setAttribute('aria-label', config.label);
 
     const unit = document.createElement('span');
     unit.className = 'input-unit';
-    unit.textContent = type === 'totalLots' ? 'lots' : 'slots';
+    unit.textContent = type === 'totalLots' ? 'slots' : 'slots';
 
     inputWrapper.appendChild(input);
     inputWrapper.appendChild(unit);
@@ -50,8 +51,9 @@ export function initParkingInputs() {
     container.appendChild(controlGroup);
 
     input.addEventListener('input', () => {
+      const maxVal = config.max || 9999;
       const stats = { ...getState('parkingStats') };
-      stats[type] = Math.max(0, parseInt(input.value) || 0);
+      stats[type] = Math.max(0, Math.min(maxVal, parseInt(input.value) || 0));
       setState({ parkingStats: stats });
     });
   }
