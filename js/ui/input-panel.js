@@ -75,9 +75,10 @@ export function initVehicleInputs() {
     const label = document.createElement('label');
     label.htmlFor = `vehicle-${type}`;
     let icon = '';
-    if (config.icon === 'car' && type === 'petrolCar') icon = '🚗 ';
-    else if (config.icon === 'car' && type === 'dieselCar') icon = '🚙 ';
-    else if (config.icon === 'bike') icon = '🛵 ';
+    if (type === 'petrolCar') icon = '🚗 ';
+    else if (type === 'dieselCar') icon = '🚙 ';
+    else if (type === 'scooter') icon = '🛵 ';
+    else if (type === 'motorcycle') icon = '🏍️ ';
     
     label.textContent = icon + config.label;
 
